@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Truth Dare Situation AWS Check</title>
+
+<style>
+    body {
+        background: #0e0e0e;
+        font-family: "Poppins", sans-serif;
+        color: white;
+        text-align: center;
+        padding: 40px;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 25px;
+        color: #00eaff;
+        text-shadow: 0 0 10px #00eaff;
+    }
+
+    .btn-container {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        margin-bottom: 40px;
+        flex-wrap: wrap;
+    }
+
+    button {
+        padding: 16px 30px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        border: none;
+        border-radius: 10px;
+        transition: 0.2s;
+        font-weight: bold;
+        color: white;
+    }
+
+    .truth { background: #007bff; }
+    .dare { background: #ff004c; }
+    .situation { background: #ff9500; }
+
+    button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 12px white;
+    }
+
+    .output-box {
+        background: #1c1c1c;
+        padding: 25px;
+        border-radius: 12px;
+        width: 85%;
+        margin: auto;
+        font-size: 1.3rem;
+        min-height: 140px;
+        border: 2px solid #383838;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    @media(max-width: 600px) {
+        .output-box {
+            font-size: 1.1rem;
+        }
+    }
+</style>
+</head>
+<body>
+
+<h1>🔥 Truth • Dare • Situation 🔥</h1>
+
+<div class="btn-container">
+    <button class="truth" onclick="getChallenge('truth')">Truth</button>
+    <button class="dare" onclick="getChallenge('dare')">Dare</button>
+    <button class="situation" onclick="getChallenge('situation')">Situation</button>
+</div>
+
+<div class="output-box" id="output">👇 Tap any button to start the game</div>
+
+<script>
+    const API_URL = "https://7c4hgf3k54.execute-api.ap-southeast-1.amazonaws.com/stage1?mode=";
+
+    async function getChallenge(type) {
+        document.getElementById("output").innerHTML = "⏳ Loading...";
+
+        try {
+            const response = await fetch(API_URL + type);
+            const data = await response.json();
+
+            document.getElementById("output").innerHTML = `
+                <strong style="color:#0ff; font-size:1.4rem;">
+                    ${data.mode.toUpperCase()}
+                </strong><br><br>${data.challenge}
+            `;
+        } catch (err) {
+            document.getElementById("output").innerHTML = "❌ Something went wrong, try again.";
+        }
+    }
+</script>
+
+</body>
+</html>
