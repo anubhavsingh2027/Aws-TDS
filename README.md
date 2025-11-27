@@ -33,7 +33,7 @@ This project helped me understand deployment pipelines, serverless logic, and cl
 
 | Layer | Technology |
 |-------|------------|
-| Frontend |Html |javaScript |
+| Frontend | Html / JavaScript |
 | Backend | AWS (Lambda / API Gateway / DynamoDB — depending on setup) |
 | Hosting | Vercel (Frontend), AWS (Backend) |
 | Styling | CSS |
